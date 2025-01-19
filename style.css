@@ -1,0 +1,134 @@
+body {
+    font-family: 'Comic Sans MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #FFEEAD, #FF6F61);
+    color: #333;
+}
+
+header {
+    background-color: #FF6F61;
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem; /* Increased size */
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    letter-spacing: 4px; /* Added more spacing */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for more emphasis */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem; /* Increased size */
+    transition: color 0.3s ease;
+    letter-spacing: 1px;
+}
+
+nav ul li a:hover {
+    color: #FFE74C;
+    text-shadow: 1px 1px 5px #FFE74C;
+}
+
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+    background: #FFF8E1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+main h2 {
+    color: #FF6F61;
+    border-bottom: 3px dashed #FFE74C;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem; /* Increased margin for more separation */
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    font-size: 2.2rem; /* Increased size */
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+button {
+    background: #FF6F61;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin: 0.5rem 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #FF3E41;
+    transform: scale(1.05);
+}
+
+button:active {
+    background: #B82F27;
+    transform: scale(0.95);
+}
+
+footer {
+    text-align: center;
+    background: #333;
+    color: #FFD700;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1.3rem; /* Increased footer font size */
+}
+
+.teacher-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #FFF8E1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 5px solid #FF6F61;
+}
+
+.teacher-profile p {
+    margin: 0;
+    font-size: 1.2rem; /* Slight increase in profile text size */
+    line-height: 1.5;
+    color: #333;
+}

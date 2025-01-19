@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #pdfViewer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .pdfPage {
+            margin: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 5px;
+            background-color: #f9f9f9;
+            width: 300px; /* Adjusted width for book-like appearance */
+            height: auto;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            background-color: #FF6F61;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .tab-button:hover {
+            background-color: #FF3E41;
+            transform: scale(1.05);
+        }
+        .tab-button:active {
+            background-color: #B82F27;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Nota</h1>
+            <ul>
+                <li><a href="index.html">Laman Utama</a></li>
+                <li><a href="manual.html">Manual Panduan Penggunaan</a></li>
+                <li><a href="games.html">Kuiz</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="notes">
+            <div class="tabs">
+                <button class="tab-button" onclick="openTab('notesTab')">Nota</button>
+                <button class="tab-button" onclick="openTab('videosTab')">Video</button>
+            </div>
+            
+            <div id="notesTab" class="tab-content active">
+                <h2>Nota</h2>
+                <div class="book-view">
+                    <!-- PDF Viewer -->
+                    <div id="pdfViewer"></div>
+                    <p id="errorMessage" class="error-message" style="display: none;">PDF gagal dimuatkan. Sila pastikan fail tersedia.</p>
+                </div>
+            </div>
+            
+            <div id="videosTab" class="tab-content">
+                <h2>Video</h2>
+                <div class="video-gallery">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/iAL2xgnl0Ko" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+        <!-- Additional Notes Section -->
+        <div id="notesSection">
+            <h3>Nota Tambahan:</h3>
+            <p>Untuk maklumat lanjut, sila tekan pautan berikut:</p>
+            <a href="http://goo.gl/RxZrfM" target="_blank">Nota Tambahan 1</a>
+            <div>
+            <a href="http://goo.gl/1DnjfW" target="_blank">Nota Tambahan 2</a>
+            </div>
+            <div>
+            <a href="http://goo.gl/GKocoF" target="_blank">Nota Tambahan 3</a>
+            </div>
+            <div>
+            <a href="http://goo.gl/DS2PsA" target="_blank">Nota Tambahan 4</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 ComputeThink. by Cikgu Fitry.</p>
+    </footer>
+
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+    <script>
+        function openTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Function to render PDF in a book-like format
+        function renderPDF(pdfFile) {
+            const viewer = document.getElementById('pdfViewer');
+            const errorMessage = document.getElementById('errorMessage');
+
+            pdfjsLib.getDocument(pdfFile).promise
+                .then(function(pdf) {
+                    errorMessage.style.display = 'none'; // Hide error message
+                    const numPages = pdf.numPages;
+                    for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+                        pdf.getPage(pageNum).then(function(page) {
+                            const canvas = document.createElement('canvas');
+                            const context = canvas.getContext('2d');
+                            const viewport = page.getViewport({ scale: 1.5 });
+
+                            canvas.width = viewport.width;
+                            canvas.height = viewport.height;
+
+                            page.render({
+                                canvasContext: context,
+                                viewport: viewport
+                            }).promise.then(function() {
+                                const pdfPageDiv = document.createElement('div');
+                                pdfPageDiv.classList.add('pdfPage');
+                                pdfPageDiv.appendChild(canvas);
+                                viewer.appendChild(pdfPageDiv);
+                            });
+                        });
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error loading PDF:', error);
+                    errorMessage.style.display = 'block'; // Show error message
+                });
+        }
+
+        // Load the embedded PDF
+        const pdfFile = 'notes.pdf'; // Laluan relatif
+    renderPDF(pdfFile);
+    </script>
+</body>
+</html>

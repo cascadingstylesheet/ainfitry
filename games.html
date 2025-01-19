@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Kuiz</h1>
+            <ul>
+                <li><a href="index.html">Laman Utama</a></li>
+                <li><a href="manual.html">Manual Panduan Penggunaan</a></li>
+                <li><a href="notes.html">Nota</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="games">
+            <h2>Kuiz</h2>
+            <div id="quiz">
+                <h3 id="question"></h3>
+                <div id="options"></div>
+                <p id="feedback"></p>
+                <p id="score">Skor: 0</p>
+                <button id="next-button" style="display: none;">Soalan Seterusnya</button>
+                <p id="timer">Masa: 30 saat</p>
+            </div>
+        </section>
+        <section id="additional-quizzes">
+            <h2>Kuiz Tambahan</h2>
+            <p>Untuk kuiz tambahan, sila tekan pautan berikut:</p>
+            <a href="https://dashboard.blooket.com/set/6756de9ad5487273b2a38ab9" target="_blank">Kuiz Tambahan</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 ComputeThink. by Cikgu Fitry.</p>
+    </footer>
+    <script>
+        const questions = [
+            { question: "Apakah yang dimaksudkan dengan teknik leraian dalam pemikiran komputasional?", options: ["Memecahkan masalah besar kepada bahagian kecil", "Mencari penyelesaian dalam masa yang cepat", "Menganalisis corak dalam data", "Menentukan langkah-langkah penyelesaian secara tertib"], answer: "Memecahkan masalah besar kepada bahagian kecil" },
+            { question: "Pengecaman corak dalam pemikiran komputasional merujuk kepada:", options: ["Mengelakkan penggunaan maklumat berlebihan", "Mengenal pasti persamaan dan perbezaan dalam data", "Membuat keputusan berdasarkan langkah-langkah yang disusun", "Mencipta corak baru dalam masalah yang diberikan"], answer: "Mengenal pasti persamaan dan perbezaan dalam data" },
+            { question: "Peniskalaan (Abstraction) dalam pemikiran komputasional membolehkan kita:", options: ["Mengabaikan perincian yang tidak penting", "Menyelesaikan masalah lebih cepat", "Mencari penyelesaian dengan mengumpul semua maklumat", "Menganalisis semua data yang ada"], answer: "Mengabaikan perincian yang tidak penting" },
+            { question: "Pengitlakan (Generalisation) dalam pemikiran komputasional membantu kita untuk:", options: ["Menyelesaikan masalah yang sama secara berulang", "Menerapkan penyelesaian kepada situasi yang lebih luas", "Memecahkan masalah kepada bahagian yang lebih kecil", "Menggunakan teknik leraian dengan lebih efektif"], answer: "Menerapkan penyelesaian kepada situasi yang lebih luas" },
+            { question: "Manakah antara berikut adalah contoh terbaik teknik leraian?", options: ["Menyusun langkah-langkah penyelesaian dari mudah ke sukar", "Mengelompokkan data untuk mengenal pasti corak", "Memecahkan masalah besar kepada tugasan lebih kecil", "Membuat keputusan berdasarkan analisis terperinci"], answer: "Memecahkan masalah besar kepada tugasan lebih kecil" },
+            { question: "Bagaimanakah anda boleh menyelesaikan tugasan menggunakan teknik leraian?", options: ["Menyelesaikan semua tugas secara serentak", "Memecahkan tugasan kepada bahagian yang lebih kecil dan mudah", "Melakukan langkah-langkah tanpa mengikut urutan yang betul", "Mencari penyelesaian dari bahagian yang paling sukar"], answer: "Memecahkan tugasan kepada bahagian yang lebih kecil dan mudah" },
+            { question: "Apakah langkah pertama yang perlu dilakukan apabila menggunakan teknik leraian untuk menyelesaikan masalah?", options: ["Mengenal pasti penyelesaian akhir terlebih dahulu", "Memecahkan masalah kepada bahagian kecil", "Menentukan urutan langkah yang akan diambil", "Mencari corak dalam data yang ada"], answer: "Memecahkan masalah kepada bahagian kecil" },
+            { question: "Setelah memecahkan masalah kepada bahagian kecil, apa yang perlu dilakukan seterusnya?", options: ["Menyelesaikan masalah berdasarkan bahagian yang paling sukar", "Menentukan langkah-langkah penyelesaian secara tertib", "Mengabaikan bahagian yang kurang penting", "Menyelesaikan masalah secara serentak untuk semua bahagian"], answer: "Menentukan langkah-langkah penyelesaian secara tertib" },
+            { question: "Dalam konteks pemikiran komputasional, apakah yang dimaksudkan dengan ‘langkah secara tertib’?", options: ["Menyelesaikan semua tugas dengan cara yang rawak", "Menyelesaikan masalah satu demi satu, mengikut urutan", "Memecahkan masalah kepada bahagian yang lebih kecil", "Menyelesaikan tugas dengan cara yang mudah"], answer: "Menyelesaikan masalah satu demi satu, mengikut urutan" },
+            { question: "Mengapa penting untuk menentukan langkah secara tertib dalam pemikiran komputasional?", options: ["Untuk menjimatkan masa dengan mengabaikan langkah yang tidak penting", "Untuk menyelesaikan masalah secara lebih efisien dan teratur", "Untuk membuat keputusan yang lebih cepat", "Untuk memastikan semua data dikumpulkan terlebih dahulu"], answer: "Untuk menyelesaikan masalah secara lebih efisien dan teratur" },
+            { question: "Apakah yang dimaksudkan dengan ‘peniskalaan’ dalam teknik pemikiran komputasional?", options: ["Mengabaikan perincian untuk fokus kepada perkara utama", "Menyusun langkah-langkah penyelesaian dari mudah ke sukar", "Menganalisis setiap bahagian masalah dengan teliti", "Menggunakan data untuk membuat keputusan yang tepat"], answer: "Mengabaikan perincian untuk fokus kepada perkara utama" },
+            { question: "Teknik pengecaman corak berguna apabila kita:", options: ["Perlu mengenal pasti persamaan dalam masalah", "Perlu membahagikan masalah kepada bahagian kecil", "Mengabaikan semua data yang tidak relevan", "Melaksanakan penyelesaian tanpa langkah-langkah yang tertib"], answer: "Perlu mengenal pasti persamaan dalam masalah" },
+            { question: "Apakah salah satu contoh pengecaman corak dalam kehidupan seharian?", options: ["Menyelesaikan masalah dengan cara yang sama setiap kali", "Memahami cara-cara orang berinteraksi melalui analisis data", "Menentukan urutan langkah-langkah tanpa sebarang analisis", "Menggunakan algoritma untuk mencari corak dalam cuaca"], answer: "Memahami cara-cara orang berinteraksi melalui analisis data" },
+            { question: "Kenapa peniskalaan (Abstraction) adalah penting dalam menyelesaikan masalah?", options: ["Ia membolehkan kita untuk fokus hanya pada maklumat yang relevan", "Ia memaksa kita untuk mengkaji setiap perincian dalam masalah", "Ia membantu kita untuk menyelesaikan masalah tanpa sebarang langkah tertentu", "Ia mempercepatkan penyelesaian masalah tanpa membuat analisis"], answer: "Ia membolehkan kita untuk fokus hanya pada maklumat yang relevan" },
+            { question: "Apakah contoh peniskalaan yang baik?", options: ["Menyusun maklumat secara rawak", "Menentukan langkah-langkah tanpa mengira keperluan masalah", "Menghapuskan perincian yang tidak relevan dan fokus kepada maklumat penting", "Memecahkan masalah besar kepada bahagian yang lebih besar"], answer: "Menghapuskan perincian yang tidak relevan dan fokus kepada maklumat penting" },
+            { question: "Pengitlakan (Generalisation) digunakan untuk:", options: ["Menyelesaikan masalah yang sama berulang kali", "Menyelesaikan masalah dengan analisis yang mendalam", "Menerapkan penyelesaian masalah kepada situasi yang lebih luas", "Memecahkan masalah kepada bahagian kecil"], answer: "Menerapkan penyelesaian masalah kepada situasi yang lebih luas" },
+            { question: "Contoh pengitlakan yang betul adalah:", options: ["Menyelesaikan masalah dengan pendekatan yang berbeza setiap kali", "Menerapkan teknik yang sama untuk pelbagai situasi yang serupa", "Mengabaikan langkah-langkah tertentu yang tidak penting", "Menggunakan teknik analisis terperinci tanpa mengambil kira konteks"], answer: "Menerapkan teknik yang sama untuk pelbagai situasi yang serupa" },
+            { question: "Apakah perbezaan utama antara pengecaman corak dan pengitlakan?", options: ["Pengecaman corak fokus kepada mengenal pasti persamaan dalam data, manakala pengitlakan fokus kepada menerapkan penyelesaian yang lebih umum", "Pengecaman corak melibatkan perincian masalah, manakala pengitlakan mengabaikan semua maklumat", "Pengecaman corak memerlukan langkah-langkah secara tertib, manakala pengitlakan lebih bergantung kepada keputusan spontan", "Pengecaman corak tidak memerlukan analisis, manakala pengitlakan memerlukan analisis mendalam"], answer: "Pengecaman corak fokus kepada mengenal pasti persamaan dalam data, manakala pengitlakan fokus kepada menerapkan penyelesaian yang lebih umum" },
+			{ question: "Apakah contoh pengitlakan yang berlaku dalam kehidupan seharian?", options: ["Menggunakan alat yang sama untuk semua jeis masalah", "Menganalisis masalah secara terperinci tanpa mengelompokkan data", "Menerapkan prinsip yang sama untuk masalah yang berbeza", "Membahagikan masalah kepada bahagian kecil tanpa memikirkan penyelesaian"], answer: "Menerapkan prinsip yang sama untuk masalah yang berbeza" },
+            { question: "Bagaimana pengitlakan membantu dalam menyelesaikan masalah?", options: ["Dengan membuat keputusan berdasarkan data terkini", "Dengan mengaplikasikan penyelesaian umum kepada situasi baru", "Dengan menyelesaikan masalah secara berulang-ulang", "Dengan mengelakkan penggunaan teknik leraian"], answer: "Dengan mengaplikasikan penyelesaian umum kepada situasi baru" },
+            { question: "Bagaimanakah teknik pemikiran komputasional boleh membantu menyelesaikan masalah harian?", options: ["Dengan melaksanakan langkah-langkah penyelesaian secara rawak", "Dengan mengenal pasti corak dalam situasi harian dan menyelesaikannya secara tertib", "Dengan memecahkan masalah tanpa memahami keseluruhan situasi", "Dengan mengabaikan maklumat yang tidak relevan"], answer: "Dengan mengenal pasti corak dalam situasi harian dan menyelesaikannya secara tertib" },
+            { question: "Pemikiran komputasional membolehkan kita untuk:", options: ["Menyelesaikan masalah secara terperinci tanpa mengelakkan maklumat", "Mengorganisasikan dan menyelesaikan masalah dengan cara yang lebih sistematik", "Menyelesaikan masalah hanya berdasarkan intuisi", "Mengabaikan langkah-langkah yang tidak penting"], answer: "Mengorganisasikan dan menyelesaikan masalah dengan cara yang lebih sistematik" },
+            { question: "Apakah kelebihan menggunakan teknik leraian dalam menyelesaikan masalah?", options: ["Dapat menyelesaikan masalah dengan cepat tanpa sebarang rencana", "Membantu kita untuk menyusun langkah-langkah dengan cara yang sistematik", "Menghindari pengumpulan data yang relevan", "Membolehkan kita untuk memecahkan masalah tanpa langkah-langkah yang jelas"], answer: "Membantu kita untuk menyusun langkah-langkah dengan cara yang sistematik" },
+            { question: "Teknik pengecaman corak boleh digunakan dalam analisis untuk:", options: ["Membuat keputusan yang sama berulang kali", "Mencari penyelesaian dalam pelbagai situasi serupa", "Menyusun langkah-langkah secara rawak", "Menyelesaikan masalah tanpa analisis data"], answer: "Mencari penyelesaian dalam pelbagai situasi serupa" },
+            { question: "Bagaimana pengitlakan membantu dalam pemikiran komputasional? ", options: ["Membantu kita untuk menyelesaikan masalah dengan cara yang sama berulang kali", "Membolehkan kita untuk mengelompokkan masalah menjadi lebih kecil", "Menyelesaikan masalah dengan menggunakan penyelesaian umum untuk situasi baru", "Menghilangkan semua perincian yang tidak relevan dalam masalah"], answer: "Menyelesaikan masalah dengan menggunakan penyelesaian umum untuk situasi baru" },
+        ];
+
+        let currentQuestionIndex = 0;
+        let currentScore = 0;
+        let timer;
+        let timeLeft = 30;
+
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        const feedback = document.getElementById('feedback');
+        const scoreDisplay = document.getElementById('score');
+        const nextButton = document.getElementById('next-button');
+        const timerDisplay = document.getElementById('timer');
+
+        function startTimer() {
+            timerDisplay.textContent = `Masa: ${timeLeft} saat`;
+            timer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Masa: ${timeLeft} saat`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            if (timer) clearInterval(timer);
+            timeLeft = 30;
+            startTimer();
+
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = `Soalan ${currentQuestionIndex + 1}: ${currentQuestion.question}`;
+            optionsElement.innerHTML = '';
+            feedback.textContent = '';
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+
+            nextButton.style.display = 'none';
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                feedback.textContent = 'Betul! Tahniah.';
+                feedback.style.color = 'green';
+                currentScore += 10;
+            } else {
+                feedback.textContent = `Salah! Jawapan betul ialah ${currentQuestion.answer}.`;
+                feedback.style.color = 'red';
+            }
+
+            scoreDisplay.textContent = `Skor: ${currentScore}`;
+            nextButton.style.display = 'block';
+        }
+
+        nextButton.onclick = () => {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                endQuiz();
+            }
+        };
+
+        function endQuiz() {
+            clearInterval(timer);
+            questionElement.textContent = 'Kuiz Tamat!';
+            optionsElement.innerHTML = '';
+            feedback.textContent = `Skor Akhir Anda: ${currentScore}`;
+            nextButton.style.display = 'none';
+            timerDisplay.style.display = 'none';
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
